@@ -1,0 +1,6 @@
+{
+  "name": "AI Career Path",
+  "description": "AI-powered Career Counselor and Learning Path Architect generating personalized career roadmaps, curated resources, and portfolio project suggestions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
