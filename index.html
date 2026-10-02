@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Career Path Explorer - Roadmaps, Skills & Guidance</title>
+  <meta name="description" content="Find your ideal career path in Artificial Intelligence, Machine Learning, Data Science, and GenAI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">AI Career<span class="accent-text">Path</span></span>
+      </div>
+      
+      <nav class="nav-links">
+        <button class="nav-link active" data-tab="explore-tab">Explore Roles</button>
+        <button class="nav-link" data-tab="quiz-tab">Career Quiz</button>
+        <button class="nav-link" data-tab="progress-tab">My Progress</button>
+        <button class="nav-link" data-tab="advisor-tab">AI Advisor</button>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="icon-btn" title="Toggle Theme" aria-label="Toggle Theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <button class="btn btn-primary nav-cta-btn" onclick="switchTab('quiz-tab')">Find My Path</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="hero-section">
+      <div class="container">
+        <div class="badge-pill">🚀 The Complete Roadmap from Beginner to AI Professional</div>
+        <h1 class="hero-title">Navigate Your Career in <span class="gradient-text">Artificial Intelligence</span></h1>
+        <p class="hero-subtitle">
+          From Machine Learning and Data Science to Generative AI and MLOps. Discover personalized step-by-step roadmaps, essential skills, curated projects, and track your progress to industry readiness.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg" onclick="switchTab('quiz-tab')">🎯 Take Career Match Quiz</button>
+          <button class="btn btn-secondary btn-lg" onclick="switchTab('explore-tab')">📚 Browse All 10+ AI Roles</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- TAB 1: EXPLORE ROLES -->
+      <section id="explore-tab" class="tab-content active">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Explore AI Career Specializations</h2>
+            <p class="section-desc">Click on any role to inspect full learning roadmaps, required tools, project ideas, and salary expectations.</p>
+          </div>
+          <div class="search-filter-wrapper">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="roleSearchInput" placeholder="Search by role or skill (e.g., PyTorch, NLP, SQL)..." />
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-pills" id="filterPillsContainer">
+          <button class="filter-pill active" data-filter="all">All Roles</button>
+          <button class="filter-pill" data-filter="Engineering">Engineering</button>
+          <button class="filter-pill" data-filter="Data">Data & Analytics</button>
+          <button class="filter-pill" data-filter="Generative AI">GenAI & LLMs</button>
+          <button class="filter-pill" data-filter="Infrastructure">MLOps & Cloud</button>
+          <button class="filter-pill" data-filter="Beginner Friendly">Beginner Friendly</button>
+        </div>
+
+        <div class="career-grid" id="careerGrid"></div>
+      </section>
+
+      <!-- TAB 2: CAREER QUIZ -->
+      <section id="quiz-tab" class="tab-content">
+        <div class="quiz-container">
+          <div class="quiz-header">
+            <span class="badge-pill">AI Diagnostic Assessment</span>
+            <h2 class="section-title">Find Your Best-Fit AI Career Track</h2>
+            <p class="section-desc">Answer 5 quick questions about your background and interests. Our recommendation engine will compute your optimal path.</p>
+          </div>
+
+          <div class="quiz-card" id="quizCard">
+            <div id="quizStepContainer"></div>
+            <div class="quiz-controls">
+              <button id="prevQuestionBtn" class="btn btn-outline" style="display: none;">Back</button>
+              <button id="nextQuestionBtn" class="btn btn-primary" disabled>Next Question &rarr;</button>
+            </div>
+          </div>
+
+          <div class="quiz-results" id="quizResults" style="display: none;">
+            <div class="result-header">
+              <div class="trophy-icon">🏆</div>
+              <h2>Your Recommended AI Career Tracks</h2>
+              <p>Based on your strengths and goals, here are your top matches:</p>
+            </div>
+            <div class="results-list" id="resultsList"></div>
+            <div class="results-actions">
+              <button class="btn btn-secondary" onclick="restartQuiz()">🔄 Retake Assessment</button>
+              <button class="btn btn-primary" onclick="switchTab('progress-tab')">📋 Open Progress Tracker</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: PROGRESS TRACKER -->
+      <section id="progress-tab" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Interactive Learning Tracker</h2>
+            <p class="section-desc">Track completed milestones. Your progress is saved automatically in your browser.</p>
+          </div>
+          <div class="track-selector-wrapper">
+            <label for="trackSelectDropdown" class="dropdown-label">Select Active Path:</label>
+            <select id="trackSelectDropdown" class="custom-select"></select>
+          </div>
+        </div>
+
+        <div class="progress-summary-card">
+          <div class="progress-info">
+            <h3 id="currentTrackTitle">Machine Learning Engineer</h3>
+            <p id="currentTrackDescription">Master statistical modeling, supervised/unsupervised learning, deep learning, and deployment.</p>
+            <div class="progress-stats">
+              <span id="completedCount">0</span> of <span id="totalMilestonesCount">0</span> milestones completed (<span id="progressPercentage">0%</span>)
+            </div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+          </div>
+          <div class="progress-actions">
+            <button class="btn btn-sm btn-outline" onclick="resetTrackProgress()">Reset Progress</button>
+            <button class="btn btn-sm btn-secondary" onclick="exportProgress()">Export Progress (JSON)</button>
+          </div>
+        </div>
+
+        <div class="milestones-checklist" id="milestonesList"></div>
+      </section>
+
+      <!-- TAB 4: AI CAREER ADVISOR -->
+      <section id="advisor-tab" class="tab-content">
+        <div class="advisor-wrapper">
+          <div class="advisor-header">
+            <div class="advisor-avatar">🤖</div>
+            <div>
+              <h2>AI Career Mentor & Advisor</h2>
+              <p>Get instant tailored guidance on resumes, portfolios, math prerequisites, and career transitions.</p>
+            </div>
+          </div>
+
+          <div class="api-key-banner">
+            <div class="api-key-info">
+              <span>💡 <strong>Live AI Mode:</strong> Add your Google Gemini API Key to chat with a live LLM, or use our smart built-in knowledge engine offline.</span>
+            </div>
+            <div class="api-key-input-group">
+              <input type="password" id="geminiApiKeyInput" placeholder="Enter Gemini API Key (optional)" />
+              <button class="btn btn-sm btn-secondary" onclick="saveApiKey()">Save</button>
+            </div>
+          </div>
+
+          <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+              <div class="chat-message assistant">
+                <div class="msg-avatar">🤖</div>
+                <div class="msg-content">
+                  <p><strong>Hello! I am your AI Career Advisor.</strong></p>
+                  <p>Whether you're transitioning from Web Development or starting fresh, I can help you choose the right path and tools.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="quick-prompts">
+              <button class="prompt-chip" onclick="sendQuickPrompt('How do I switch from Web Development (React/Node) to AI?')">🔄 Switch from Web Dev</button>
+              <button class="prompt-chip" onclick="sendQuickPrompt('What is the minimum mathematics needed for Machine Learning?')">📐 Math prerequisites</button>
+              <button class="prompt-chip" onclick="sendQuickPrompt('What are top 3 beginner portfolio projects to get hired in 2025/2026?')">⭐ Top Portfolio Projects</button>
+              <button class="prompt-chip" onclick="sendQuickPrompt('What is the difference between Data Science and MLOps?')">⚖️ Data Science vs MLOps</button>
+            </div>
+
+            <div class="chat-input-bar">
+              <input type="text" id="chatInput" placeholder="Ask anything about AI careers..." onkeypress="handleChatKeyPress(event)" />
+              <button id="sendChatBtn" class="btn btn-primary" onclick="sendUserMessage()">Send</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="careerModalOverlay">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeCareerModal()">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 <strong>AI Career Path</strong>. Built for developers, students, and aspiring AI Engineers.</p>
+      <div class="footer-links">
+        <a href="https://github.com/aastha803/AI-Career-Path" target="_blank" rel="noopener">GitHub Repository</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
