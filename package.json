@@ -1,0 +1,12 @@
+{
+  "name": "ai-career-path-web",
+  "version": "1.0.0",
+  "description": "Interactive AI Career Path Explorer & Roadmap Web Application",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["ai", "career-path", "machine-learning", "data-science", "roadmap"],
+  "author": "aastha803",
+  "license": "MIT"
+}
